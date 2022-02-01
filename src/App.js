@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import { ThemeProvider } from 'styled-components';
+import Sidebar from './components/Sidebar';
+import MyProducts from './pages/MyProducts';
 
-function App() {
+const theme = {
+  grey: 'rgb(218, 224, 227);',
+  purple: 'rgb(93,65,172)',
+};
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <>
+        <Router>
+          <Navbar />
+          <div style={{ height: '100vh', display: 'flex' }}>
+            <Sidebar />
+            <Routes>
+              <Route path="/myProducts" element={<MyProducts />} />
+            </Routes>
+          </div>
+        </Router>
+      </>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
